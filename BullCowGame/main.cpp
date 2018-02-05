@@ -6,21 +6,16 @@
 
 using namespace std; // Using the "std" namespace, so "cout" can be used instead of "std::cout".
 
-string GetGuessAndPrintBack();
+string GetGuess();
+void PrintGuess(string Guess);
+
+string Guess = "";
 
 int main()
-{
-	
+{	
 	PrintIntro();
-
-	constexpr int NUMBER_OF_TURNS = 5;
-
-	for (int count = 1; count <= NUMBER_OF_TURNS; count++)
-	{
-		GetGuessAndPrintBack();
-	}
-
-	return 0;
+	PlayGame();
+	return 0; // Exit the application.
 }
 
 void PrintIntro()
@@ -32,19 +27,32 @@ void PrintIntro()
 	return;
 }
 
-string GetGuessAndPrintBack()
+void PlayGame()
+{
+	constexpr int NUMBER_OF_TURNS = 5;
+
+	for (int count = 1; count <= NUMBER_OF_TURNS; count++)
+	{
+		Guess = GetGuess();
+		PrintGuess(Guess);
+	}
+}
+
+string GetGuess()
 {
 	// Get a guess from the player.
 	cout << "Enter your guess: ";
 
-	string Guess = "";
 	// Store input after hitting enter.
 	getline(cin, Guess);
 
+	return Guess;
+}
+
+void PrintGuess(string Guess)
+{
 	// Repeat the guess back to them.
 	cout << "Your guess was: " << Guess;
 	cout << endl;
 	cout << endl;
-
-	return Guess;
 }
