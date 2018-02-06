@@ -4,13 +4,11 @@
 #include <string> // Includes standard library for strin operations, eg. >>.
 #include "main.h"
 
-using namespace std; // Using the "std" namespace, so "cout" can be used instead of "std::cout".
-
-string GetGuess();
-void PrintGuess(string Guess);
+std::string GetGuess();
+void PrintGuess(std::string Guess);
 bool AskToPlayAgain();
 
-string Guess = "";
+std::string Guess = "";
 
 int main()
 {	
@@ -27,9 +25,9 @@ int main()
 void PrintIntro()
 {
 	constexpr int WORD_LENGT = 5; // constexpr won't change at runtime.
-	cout << "WELCOME TO BULLS AND COWS! \n"; // st::endl or "\n" for new line.
-	cout << "Can you guess the " << WORD_LENGT << " letter isogram I'm thinking of? \n";
-	cout << endl;
+	std::cout << "WELCOME TO BULLS AND COWS! \n"; // st::endl or "\n" for new line.
+	std::cout << "Can you guess the " << WORD_LENGT << " letter isogram I'm thinking of? \n";
+	std::cout << std::endl;
 	return;
 }
 
@@ -44,30 +42,30 @@ void PlayGame()
 	}
 }
 
-string GetGuess()
+std::string GetGuess()
 {
-	cout << "Enter your guess: ";
+	std::cout << "Enter your guess: ";
 
 	// Store input after hitting enter.
-	getline(cin, Guess);
+	getline(std::cin, Guess);
 
 	return Guess;
 }
 
-void PrintGuess(string Guess)
+void PrintGuess(std::string Guess)
 {
-	cout << "Your guess was: " << Guess;
-	cout << endl;
-	cout << endl;
+	std::cout << "Your guess was: " << Guess;
+	std::cout << std::endl;
+	std::cout << std::endl;
 }
 
 bool AskToPlayAgain()
 {
-	cout << "Do you want to play again (y/n)? ";
+	std::cout << "Do you want to play again (y/n)? ";
 	
-	string Response = "";
-	getline(cin, Response);
-	cout << endl;
+	std::string Response = "";
+	getline(std::cin, Response);
+	std::cout << std::endl;
 
 	if ((Response[0] == 'y') || (Response[0] == 'Y'))
 	{
