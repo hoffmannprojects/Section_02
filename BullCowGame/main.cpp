@@ -8,6 +8,7 @@ using namespace std; // Using the "std" namespace, so "cout" can be used instead
 
 string GetGuess();
 void PrintGuess(string Guess);
+bool AskToPlayAgain();
 
 string Guess = "";
 
@@ -15,7 +16,9 @@ int main()
 {	
 	PrintIntro();
 	PlayGame();
-	return 0; // Exit the application.
+
+	// Exit the application.
+	return 0; 
 }
 
 void PrintIntro()
@@ -36,11 +39,12 @@ void PlayGame()
 		Guess = GetGuess();
 		PrintGuess(Guess);
 	}
+
+	AskToPlayAgain();
 }
 
 string GetGuess()
 {
-	// Get a guess from the player.
 	cout << "Enter your guess: ";
 
 	// Store input after hitting enter.
@@ -51,8 +55,25 @@ string GetGuess()
 
 void PrintGuess(string Guess)
 {
-	// Repeat the guess back to them.
 	cout << "Your guess was: " << Guess;
 	cout << endl;
 	cout << endl;
+}
+
+bool AskToPlayAgain()
+{
+	cout << "Do you want to play again? ";
+	
+	string Response = "";
+	getline(cin, Response);
+	cout << endl;
+
+	if ((Response[0] == 'y') || (Response[0] == 'Y'))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
