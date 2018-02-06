@@ -3,6 +3,7 @@
 #include <iostream> // Includes the standard library "iostream".
 #include <string> // Includes standard library for strin operations, eg. >>.
 #include "main.h"
+#include "FBullCowGame.h"
 
 std::string GetGuess();
 void PrintGuess(std::string Guess);
@@ -33,6 +34,8 @@ void PrintIntro()
 
 void PlayGame()
 {
+	FBullCowGame BCGame;
+
 	constexpr int NUMBER_OF_TURNS = 5;
 
 	for (int count = 1; count <= NUMBER_OF_TURNS; count++)
