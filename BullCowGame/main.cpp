@@ -6,10 +6,12 @@
 #include "FBullCowGame.h"
 
 std::string GetGuess();
+std::string Guess = "";
 void PrintGuess(std::string Guess);
 bool AskToPlayAgain();
 
-std::string Guess = "";
+// Instantiate a new game.
+FBullCowGame BCGame;
 
 int main()
 {	
@@ -34,7 +36,7 @@ void PrintIntro()
 
 void PlayGame()
 {
-	FBullCowGame BCGame;
+	//int tries = BCGame.GetMaxTries();
 
 	constexpr int NUMBER_OF_TURNS = 5;
 
@@ -47,7 +49,7 @@ void PlayGame()
 
 std::string GetGuess()
 {
-	std::cout << "Enter your guess: ";
+	std::cout << "Try " << BCGame.GetCurrentTry() << ". Enter your guess: ";
 
 	// Store input after hitting enter.
 	getline(std::cin, Guess);

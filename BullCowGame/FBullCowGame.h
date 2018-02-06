@@ -15,5 +15,6 @@ public:
 	//bool IsGuessCorrect();
 
 private:
-
+	int MyMaxTries = 5;
+	int MyCurrentTry = 1;
 };
