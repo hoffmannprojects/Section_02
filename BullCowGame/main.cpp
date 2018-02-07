@@ -38,20 +38,27 @@ void PlayGame()
 {
 	BCGame.Reset();
 
-	constexpr int NUMBER_OF_TURNS = 5;
+	int MaxTries = BCGame.GetMaxTries();
 
-	for (int count = 1; count <= NUMBER_OF_TURNS; count++)
+	// TODO Change from "for" to "while" loop once validating tries.
+	for (int count = 1; count <= MaxTries; count++)
 	{
 		Guess = GetGuess();
+
+		// Submit valid guess to the game.
+		// Print number of bulls and cows.
+
 		PrintGuess(Guess);
 	}
+
+	// TODO Summarise game.
 }
 
 std::string GetGuess()
 {
 	std::cout << "Try " << BCGame.GetCurrentTry() << ". Enter your guess: ";
-
 	// Store input after hitting enter.
+	// TODO make check for validity.
 	getline(std::cin, Guess);
 
 	return Guess;

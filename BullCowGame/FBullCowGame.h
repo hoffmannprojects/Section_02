@@ -13,6 +13,8 @@ public:
 	void Reset();
 	bool IsGuessValid(std::string);
 
+	// TODO Provide a method for counting bulls and cows and increasing try number.
+
 	// Maybe useful in the future.
 	//bool WantsToPlayAgain();
 	//bool IsGuessCorrect();
