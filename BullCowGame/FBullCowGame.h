@@ -4,10 +4,13 @@
 class FBullCowGame 
 {
 public:
+	FBullCowGame(); // Constructor.
+
+	int GetMaxTries() const; // const prevents functions from changing variables.
+	int GetCurrentTry() const;
+	bool IsGameWon() const;
+
 	void Reset();
-	int GetMaxTries();
-	int GetCurrentTry();
-	bool IsGameWon();
 	bool IsGuessValid(std::string);
 
 	// Maybe useful in the future.
@@ -15,6 +18,7 @@ public:
 	//bool IsGuessCorrect();
 
 private:
-	int MyMaxTries = 5;
-	int MyCurrentTry = 1;
+	// See constructor for initialization.
+	int MyMaxTries;
+	int MyCurrentTry;
 };

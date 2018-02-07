@@ -36,7 +36,7 @@ void PrintIntro()
 
 void PlayGame()
 {
-	//int tries = BCGame.GetMaxTries();
+	BCGame.Reset();
 
 	constexpr int NUMBER_OF_TURNS = 5;
 
