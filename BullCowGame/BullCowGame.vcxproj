@@ -19,9 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FBullCowGame.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FBullCowGame.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
