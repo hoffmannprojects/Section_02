@@ -5,7 +5,7 @@ using FString = std::string;
 using int32 = int;
 
 // All values initialized to 0.
-struct BullCowCount
+struct FBullCowCount
 {
 	int32 Bulls = 0;
 	int32 Cows = 0;
@@ -23,11 +23,8 @@ public:
 	void Reset();
 	bool IsGuessValid(FString);
 
-	BullCowCount SubmitGuess(FString);
+	FBullCowCount SubmitGuess(FString);
 
-	// Maybe useful in the future.
-	//bool WantsToPlayAgain();
-	//bool IsGuessCorrect();
 
 private:
 	// See constructor for initialization.
