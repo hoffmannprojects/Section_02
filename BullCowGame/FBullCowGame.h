@@ -4,6 +4,13 @@
 using FString = std::string;
 using int32 = int;
 
+// All values initialized to 0.
+struct BullCowCount
+{
+	int32 Bulls = 0;
+	int32 Cows = 0;
+};
+
 class FBullCowGame 
 {
 public:
@@ -16,7 +23,7 @@ public:
 	void Reset();
 	bool IsGuessValid(FString);
 
-	// TODO Provide a method for counting bulls and cows and increasing try number.
+	BullCowCount SubmitGuess(FString);
 
 	// Maybe useful in the future.
 	//bool WantsToPlayAgain();
@@ -26,4 +33,5 @@ private:
 	// See constructor for initialization.
 	int32 MyMaxTries;
 	int32 MyCurrentTry;
+	FString MyHiddenWord;
 };
