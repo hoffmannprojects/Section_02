@@ -1,26 +1,34 @@
 #pragma once
 #include <string>
 
+using FString = std::string;
+using int32 = int;
+
+// All values initialized to 0.
+struct FBullCowCount
+{
+	int32 Bulls = 0;
+	int32 Cows = 0;
+};
+
 class FBullCowGame 
 {
 public:
 	FBullCowGame(); // Constructor.
 
-	int GetMaxTries() const; // const prevents functions from changing variables.
-	int GetCurrentTry() const;
+	int32 GetMaxTries() const; // const prevents functions from changing variables.
+	int32 GetCurrentTry() const;
 	bool IsGameWon() const;
 
 	void Reset();
-	bool IsGuessValid(std::string);
+	bool IsGuessValid(FString);
 
-	// TODO Provide a method for counting bulls and cows and increasing try number.
+	FBullCowCount SubmitGuess(FString);
 
-	// Maybe useful in the future.
-	//bool WantsToPlayAgain();
-	//bool IsGuessCorrect();
 
 private:
 	// See constructor for initialization.
-	int MyMaxTries;
-	int MyCurrentTry;
+	int32 MyMaxTries;
+	int32 MyCurrentTry;
+	FString MyHiddenWord;
 };
