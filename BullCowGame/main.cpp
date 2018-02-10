@@ -12,7 +12,7 @@ For game logic see the FBullCowGame class.*/
 using FText = std::string;
 using int32 = int;
 
-FText GetGuess();
+FText GetValidGuess();
 FText Guess = "";
 bool AskToPlayAgain();
 
@@ -48,30 +48,46 @@ void PlayGame()
 	// TODO Change from "for" to "while" loop once validating tries.
 	for (int32 count = 1; count <= MaxTries; count++)
 	{
-		Guess = GetGuess();
-
-		EGuessStatus Status = BCGame.CheckGuessIsValid(Guess);
+		Guess = GetValidGuess();
 
 		// Submit valid guess to the game and receive counts.
 		FBullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
 
-		// Print number of bulls and cows.
 		std::cout << "Bulls = " << BullCowCount.Bulls;
-		std::cout << ", Cows = " << BullCowCount.Cows << std::endl;
-		std::cout << std::endl;
+		std::cout << ", Cows = " << BullCowCount.Cows << "\n\n";
 	}
 
 	// TODO Summarise game.
 }
 
-FText GetGuess()
+FText GetValidGuess()
 {
-	std::cout << "Try " << BCGame.GetCurrentTry() << ". Enter your guess: ";
-	// Store input after hitting enter.
-	// TODO make check for validity.
-	getline(std::cin, Guess);
+	EGuessStatus Status = EGuessStatus::Invalid_Status;
 
-	return Guess;
+	do
+	{
+		std::cout << "Try " << BCGame.GetCurrentTry() << ". Enter your guess: ";
+		// Store input after hitting enter.
+		getline(std::cin, Guess);
+
+		Status = BCGame.CheckGuessIsValid(Guess);
+		switch (Status)
+		{
+		case EGuessStatus::Not_Isogram:
+			std::cout << "Please enter an isogram, a word without repeating letters.\n";
+			break;
+		case EGuessStatus::Wrong_Length:
+			std::cout << "Please enter a " << BCGame.GetHiddenWordLength() << " letter word.\n";
+			break;
+		case EGuessStatus::Not_Lowercase:
+			std::cout << "Please enter all lowercase letters.\n";
+			break;
+		default:
+			return Guess;
+		}
+		std::cout << std::endl;
+	}
+	while (Status != EGuessStatus::Ok);
 }
 
 bool AskToPlayAgain()
