@@ -28,12 +28,11 @@ public:
 	int32 GetMaxTries() const; // const prevents functions from changing variables.
 	int32 GetCurrentTry() const;
 	int32 GetHiddenWordLength() const;
-
 	bool IsGameWon() const;
 	EGuessStatus CheckGuessIsValid(FString) const;
 
 	void Reset();
-	FBullCowCount SubmitGuess(FString);
+	FBullCowCount SubmitValidGuess(FString);
 
 
 private:
@@ -41,4 +40,5 @@ private:
 	int32 MyMaxTries;
 	int32 MyCurrentTry;
 	FString MyHiddenWord;
+	bool bGameIsWon;
 };

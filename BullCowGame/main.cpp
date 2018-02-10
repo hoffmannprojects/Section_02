@@ -33,7 +33,7 @@ int main()
 
 void PrintIntro()
 {
-	std::cout << "WELCOME TO BULLS AND COWS! \n"; // st::endl or "\n" for new line.
+	std::cout << "\n WELCOME TO BULLS AND COWS! \n"; // st::endl or "\n" for new line.
 	std::cout << "Can you guess the " << BCGame.GetHiddenWordLength() << " letter isogram I'm thinking of? \n";
 	std::cout << std::endl;
 	return;
@@ -45,13 +45,12 @@ void PlayGame()
 
 	int32 MaxTries = BCGame.GetMaxTries();
 
-	// TODO Change from "for" to "while" loop once validating tries.
-	for (int32 count = 1; count <= MaxTries; count++)
+	while (!BCGame.IsGameWon() && BCGame.GetCurrentTry() <= MaxTries)
 	{
 		Guess = GetValidGuess();
 
 		// Submit valid guess to the game and receive counts.
-		FBullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
+		FBullCowCount BullCowCount = BCGame.SubmitValidGuess(Guess);
 
 		std::cout << "Bulls = " << BullCowCount.Bulls;
 		std::cout << ", Cows = " << BullCowCount.Cows << "\n\n";
@@ -82,12 +81,13 @@ FText GetValidGuess()
 		case EGuessStatus::Not_Lowercase:
 			std::cout << "Please enter all lowercase letters.\n";
 			break;
+		// Assume Guess is valid.
 		default:
-			return Guess;
+			break;
 		}
 		std::cout << std::endl;
-	}
-	while (Status != EGuessStatus::Ok);
+	} while (Status != EGuessStatus::Ok);
+	return Guess;
 }
 
 bool AskToPlayAgain()
