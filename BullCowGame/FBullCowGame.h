@@ -11,8 +11,9 @@ struct FBullCowCount
 	int32 Cows = 0;
 };
 
-enum class EWordStatus
+enum class EGuessStatus
 {
+	Invalid_Status,
 	Ok, 
 	Not_Isogram, 
 	Wrong_Length, 
@@ -27,12 +28,11 @@ public:
 	int32 GetMaxTries() const; // const prevents functions from changing variables.
 	int32 GetCurrentTry() const;
 	int32 GetHiddenWordLength() const;
-
 	bool IsGameWon() const;
-	EWordStatus CheckGuessIsValid(FString) const;
+	EGuessStatus CheckGuessIsValid(FString) const;
 
 	void Reset();
-	FBullCowCount SubmitGuess(FString);
+	FBullCowCount SubmitValidGuess(FString);
 
 
 private:
@@ -40,4 +40,5 @@ private:
 	int32 MyMaxTries;
 	int32 MyCurrentTry;
 	FString MyHiddenWord;
+	bool bGameIsWon;
 };
