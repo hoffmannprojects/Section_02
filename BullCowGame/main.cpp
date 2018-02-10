@@ -14,7 +14,6 @@ using int32 = int;
 
 FText GetGuess();
 FText Guess = "";
-void PrintGuess(FText Guess);
 bool AskToPlayAgain();
 
 // Instantiate a new game.
@@ -34,9 +33,8 @@ int main()
 
 void PrintIntro()
 {
-	constexpr int32 WORD_LENGT = 5; // constexpr won't change at runtime.
 	std::cout << "WELCOME TO BULLS AND COWS! \n"; // st::endl or "\n" for new line.
-	std::cout << "Can you guess the " << WORD_LENGT << " letter isogram I'm thinking of? \n";
+	std::cout << "Can you guess the " << BCGame.GetHiddenWordLength() << " letter isogram I'm thinking of? \n";
 	std::cout << std::endl;
 	return;
 }
