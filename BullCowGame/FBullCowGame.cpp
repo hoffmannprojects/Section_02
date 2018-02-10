@@ -27,9 +27,28 @@ bool FBullCowGame::IsGameWon() const
 	return false;
 }
 
-EWordStatus FBullCowGame::CheckGuessIsValid(FString) const
+EGuessStatus FBullCowGame::CheckGuessIsValid(FString Guess) const
 {
-	return EWordStatus::Ok; //TODO: make actual error.
+	// if the guess isn't an isogram, return error
+	if (false)
+	{
+		return EGuessStatus::Not_Isogram;
+	}
+	// if the guess isn't all lowercase, return error
+	else if (false)
+	{
+		return EGuessStatus::Not_Lowercase;
+	}
+	// if the guess length is wrong, return error
+	else if (Guess.length() != GetHiddenWordLength())
+	{
+		return EGuessStatus::Wrong_Length;
+	}
+	// Otherwise return ok
+	else
+	{
+		return EGuessStatus::Ok; //TODO: make actual error.
+	}
 }
 
 void FBullCowGame::Reset()

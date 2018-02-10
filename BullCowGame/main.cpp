@@ -50,6 +50,8 @@ void PlayGame()
 	{
 		Guess = GetGuess();
 
+		EGuessStatus Status = BCGame.CheckGuessIsValid(Guess);
+
 		// Submit valid guess to the game and receive counts.
 		FBullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
 
