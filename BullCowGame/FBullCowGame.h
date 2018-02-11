@@ -41,4 +41,6 @@ private:
 	int32 MyCurrentTry;
 	FString MyHiddenWord;
 	bool bGameIsWon;
+
+	bool IsIsogram(FString) const;
 };
