@@ -1,11 +1,15 @@
+/* This class is responsible for handling all game logic.
+For view code (handling user interaction), see main.cpp.
+The game is a simple guess the word game based on Mastermind.*/
+
 #pragma once
 #include <string>
 
+// To make syntax Unreal friendly.
 using FString = std::string;
 using int32 = int;
 
-// All values initialized to 0.
-struct FBullCowCount
+struct FBullsCowsCount
 {
 	int32 Bulls = 0;
 	int32 Cows = 0;
@@ -32,13 +36,15 @@ public:
 	EGuessStatus CheckGuessIsValid(FString) const;
 
 	void Reset();
-	FBullCowCount SubmitValidGuess(FString);
+	FBullsCowsCount SubmitValidGuess(FString);
 
 
 private:
-	// See constructor for initialization.
-	int32 MyMaxTries;
+	// See constructors for initialization.
 	int32 MyCurrentTry;
 	FString MyHiddenWord;
 	bool bGameIsWon;
+
+	bool IsIsogram(FString) const;
+	bool IsLowerCase(FString) const;
 };

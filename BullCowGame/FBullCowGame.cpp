@@ -1,6 +1,10 @@
-#include "FBullCowGame.h"
+#pragma once
 
-using int32 = int;
+#include "FBullCowGame.h"
+#include <map>
+
+// To make syntax Unreal friendly.
+#define TMap std::map
 
 FBullCowGame::FBullCowGame()
 {
@@ -9,7 +13,11 @@ FBullCowGame::FBullCowGame()
 
 int32 FBullCowGame::GetMaxTries() const
 {
-	return MyMaxTries;
+	TMap <int32, int32> WordLengthToMaxTries
+	{
+		{ 3,4 },{ 4,7 },{ 5,10 },{ 6,15 },{ 7,20 }
+	};
+	return WordLengthToMaxTries[GetHiddenWordLength()];
 }
 
 int32 FBullCowGame::GetCurrentTry() const
@@ -27,37 +35,73 @@ bool FBullCowGame::IsGameWon() const
 	return bGameIsWon;
 }
 
+bool FBullCowGame::IsIsogram(FString Word) const
+{
+	if (Word.length() <= 1)
+	{
+		return true;
+	}
+
+	TMap <char, bool> LetterSeen;
+
+	for (auto Letter : Word) // "For each Letter in Word."
+	{
+		Letter = tolower(Letter);
+
+		if (LetterSeen[Letter])
+		{
+			return false;
+		}
+		else
+		{
+			LetterSeen[Letter] = true;
+		}
+	}
+
+	// For special cases, e.g. when \0 in entered.
+	return true;
+}
+
+bool FBullCowGame::IsLowerCase(FString Word) const
+{
+	for (auto Letter : Word)
+	{
+		if (!islower(Letter))
+		{
+			return false;
+		}
+	}
+	// If only lowercase letters found.
+	return true;
+}
+
 EGuessStatus FBullCowGame::CheckGuessIsValid(FString Guess) const
 {
-	// if the guess isn't an isogram, return error
-	if (false)
+	if (!IsIsogram(Guess))
 	{
 		return EGuessStatus::Not_Isogram;
 	}
-	// if the guess isn't all lowercase, return error
-	else if (false)
+	else if (!IsLowerCase(Guess))
 	{
 		return EGuessStatus::Not_Lowercase;
 	}
-	// if the guess length is wrong, return error
 	else if (Guess.length() != GetHiddenWordLength())
 	{
 		return EGuessStatus::Wrong_Length;
 	}
-	// Otherwise return ok
 	else
 	{
-		return EGuessStatus::Ok; //TODO: make actual error.
+		return EGuessStatus::Ok;
 	}
 }
 
 void FBullCowGame::Reset()
 {
-	constexpr int32 MAX_TRIES = 8;
-	const FString HIDDEN_WORD = "planet";
+	// This must be an isogram.
+	const FString HIDDEN_WORD = "plane"; 
 
-	MyMaxTries = MAX_TRIES;
 	MyHiddenWord = HIDDEN_WORD;
+
 	MyCurrentTry = 1;
 	bGameIsWon = false;
 
@@ -65,29 +109,27 @@ void FBullCowGame::Reset()
 }
 
 // Receives a valid guess, increments turn and returns count.
-FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess)
+FBullsCowsCount FBullCowGame::SubmitValidGuess(FString Guess)
 {
 	MyCurrentTry++;
-	FBullCowCount BullCowCount;
+	FBullsCowsCount BullsCowsCount;
 
 	// Loop through all letters in the hidden word.
-
 	for (int32 HiddenWordChar = 0; HiddenWordChar < GetHiddenWordLength(); HiddenWordChar++)
 	{
 		// Compare letters against the guess.
 		for (int32 GuessChar = 0; GuessChar < GetHiddenWordLength(); GuessChar++)
 		{
-			// if they match
 			if (Guess[GuessChar] == MyHiddenWord[HiddenWordChar]) 
 			{
 				// if they're in the same place
 				if (HiddenWordChar == GuessChar) 
 				{
-					BullCowCount.Bulls++;
+					BullsCowsCount.Bulls++;
 				}
 				else 
 				{
-					BullCowCount.Cows++;
+					BullsCowsCount.Cows++;
 				} 
 			}
 			
@@ -95,10 +137,10 @@ FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess)
 		}
 	}
 
-	if (BullCowCount.Bulls == GetHiddenWordLength())
+	if (BullsCowsCount.Bulls == GetHiddenWordLength())
 	{
 		bGameIsWon = true;
 	}
 
-	return BullCowCount;
+	return BullsCowsCount;
 }
