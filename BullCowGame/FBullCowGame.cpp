@@ -52,7 +52,20 @@ bool FBullCowGame::IsIsogram(FString Word) const
 		}
 	}
 
-	// For example in cases where /0 in entered.
+	// For example in cases where \0 in entered.
+	return true;
+}
+
+bool FBullCowGame::IsLowerCase(FString Word) const
+{
+	for (auto Letter : Word)
+	{
+		if (!islower(Letter))
+		{
+			return false;
+		}
+	}
+	// If only lowercase letters found.
 	return true;
 }
 
@@ -60,13 +73,10 @@ EGuessStatus FBullCowGame::CheckGuessIsValid(FString Guess) const
 {
 	if (!IsIsogram(Guess))
 	{
-		//TODO: Write function.
 		return EGuessStatus::Not_Isogram;
 	}
-	// if the guess isn't all lowercase, return error
-	else if (false)
+	else if (!IsLowerCase(Guess))
 	{
-		//TODO: Write function.
 		return EGuessStatus::Not_Lowercase;
 	}
 	// if the guess length is wrong, return error
