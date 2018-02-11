@@ -11,10 +11,11 @@ For game logic see the FBullCowGame class.*/
 using FText = std::string;
 using int32 = int;
 
+FText Guess = "";
+
 void PrintIntro();
 void PlayGame();
 FText GetValidGuess();
-FText Guess = "";
 bool AskToPlayAgain();
 void PrintGameSummary();
 
