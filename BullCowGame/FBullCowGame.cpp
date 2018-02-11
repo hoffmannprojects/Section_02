@@ -29,14 +29,28 @@ bool FBullCowGame::IsGameWon() const
 	return bGameIsWon;
 }
 
-bool FBullCowGame::IsIsogram(FString) const
+bool FBullCowGame::IsIsogram(FString Word) const
 {
-	// treat 0 or 1 letter words as isograms
+	if (Word.length() <= 1)
+	{
+		return true;
+	}
 
-	// loop through each letter in Guess
-		// if letter is in the map
-			// return false
-		// else add the letter to the map as seen
+	TMap <char, bool> LetterSeen;
+
+	for (auto Letter : Word) // "For each Letter in Word."
+	{
+		Letter = tolower(Letter); // Transform letter to lowercase.
+
+		if (LetterSeen[Letter])
+		{
+			return false;
+		}
+		else
+		{
+			LetterSeen[Letter] = true;
+		}
+	}
 
 	// For example in cases where /0 in entered.
 	return true;
