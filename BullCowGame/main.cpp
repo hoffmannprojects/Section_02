@@ -6,15 +6,17 @@ For game logic see the FBullCowGame class.*/
 
 #include <iostream> // Includes the standard library "iostream".
 #include <string> // Includes standard library for strin operations, eg. >>.
-#include "main.h"
 #include "FBullCowGame.h"
 
 using FText = std::string;
 using int32 = int;
 
+void PrintIntro();
+void PlayGame();
 FText GetValidGuess();
 FText Guess = "";
 bool AskToPlayAgain();
+void PrintGameSummary();
 
 // Instantiate a new game.
 FBullCowGame BCGame;
@@ -56,7 +58,9 @@ void PlayGame()
 		std::cout << ", Cows = " << BullCowCount.Cows << "\n\n";
 	}
 
-	// TODO Summarise game.
+	PrintGameSummary();
+
+	return;
 }
 
 FText GetValidGuess()
@@ -92,7 +96,7 @@ FText GetValidGuess()
 
 bool AskToPlayAgain()
 {
-	std::cout << "Do you want to play again (y/n)? ";
+	std::cout << "Do you want to play again with the same hidden word (y/n)? ";
 	
 	FText Response = "";
 	getline(std::cin, Response);
@@ -106,4 +110,17 @@ bool AskToPlayAgain()
 	{
 		return false;
 	}
+}
+
+void PrintGameSummary()
+{
+	if (BCGame.IsGameWon())
+	{
+		std::cout << "\n YOU WIN! \n\n";
+	}
+	else
+	{
+		std::cout << "\n You lost. Better luck next time! \n\n";
+	}
+	return;
 }

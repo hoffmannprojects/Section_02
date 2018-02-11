@@ -32,11 +32,13 @@ EGuessStatus FBullCowGame::CheckGuessIsValid(FString Guess) const
 	// if the guess isn't an isogram, return error
 	if (false)
 	{
+		//TODO: Write function.
 		return EGuessStatus::Not_Isogram;
 	}
 	// if the guess isn't all lowercase, return error
 	else if (false)
 	{
+		//TODO: Write function.
 		return EGuessStatus::Not_Lowercase;
 	}
 	// if the guess length is wrong, return error
@@ -53,7 +55,7 @@ EGuessStatus FBullCowGame::CheckGuessIsValid(FString Guess) const
 
 void FBullCowGame::Reset()
 {
-	constexpr int32 MAX_TRIES = 8;
+	constexpr int32 MAX_TRIES = 3;
 	const FString HIDDEN_WORD = "planet";
 
 	MyMaxTries = MAX_TRIES;
